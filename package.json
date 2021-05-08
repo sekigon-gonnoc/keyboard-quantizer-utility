@@ -27,7 +27,7 @@
   "build": {
     "productName": "Keyboard Quantizer Utility",
     "win": {
-      "target":"portable"
+      "target": "portable"
     },
     "directories": {
       "output": "build"

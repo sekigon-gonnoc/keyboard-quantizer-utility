@@ -11,15 +11,16 @@ let disabled = false;
 
 store.set("AppName", "Keyboard Quantizer Utility");
 
-const trayIcon = `${__dirname}/trayIcon.${process.platform === "win32" ? "ico" : "png"
-  }`;
+const trayIcon = `${__dirname}/trayIcon.${
+  process.platform === "win32" ? "ico" : "png"
+}`;
 
 const isQmkKeyboard = (k, d) => {
   return (
     d.vid ===
-    `0x${("0000" + k.vendorId.toString(16)).slice(-4).toLowerCase()}` &&
+      `0x${("0000" + k.vendorId.toString(16)).slice(-4).toLowerCase()}` &&
     d.pid ===
-    `0x${("0000" + k.productId.toString(16)).slice(-4).toLowerCase()}` &&
+      `0x${("0000" + k.productId.toString(16)).slice(-4).toLowerCase()}` &&
     k.usagePage == 0xff60 &&
     k.usage == 0x61
   );
@@ -44,7 +45,9 @@ electron.app.on("ready", () => {
         label: "Disable",
         type: "checkbox",
         checked: false,
-        click: (e) => { disabled = e.checked }
+        click: (e) => {
+          disabled = e.checked;
+        },
       },
       {
         label: "Homepage",
@@ -60,7 +63,9 @@ electron.app.on("ready", () => {
   );
 
   setInterval(() => {
-    if (disabled) { return; }
+    if (disabled) {
+      return;
+    }
     try {
       const win = activeWindow.sync();
 
@@ -103,10 +108,7 @@ electron.app.on("ready", () => {
                   console.log(`Device  ${kbLabel}`);
 
                   const key = Object.keys(app.layer).find((k) =>
-                    micromatch.isMatch(
-                      kbLabel,
-                      k.toString()
-                    )
+                    micromatch.isMatch(kbLabel, k.toString())
                   );
 
                   // set default layer
@@ -118,13 +120,11 @@ electron.app.on("ready", () => {
               } finally {
                 qkb.close();
               }
-
             });
           }
         }
       }
-    }
-    catch (e) {
+    } catch (e) {
       console.error(e);
       electron.app.quit();
     }
