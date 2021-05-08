@@ -4,9 +4,11 @@ Electron based task tray app to change default layer of [Keyboard Quantizer](htt
 - **If you want to use VIA or Remap, disable this app while editing keymaps.**
 
 ## Requirement
-### Linux
+### For Linux
  - Install `xprops`, `xwininfo`
  - Set read/write permission to the keyboard by udev rules
+### For Windows
+### For Mac
 
 ## Configuration
 
