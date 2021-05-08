@@ -37,8 +37,8 @@ Electron based task tray app to change default layer of [Keyboard Quantizer](htt
     },
     {
      // Default rule example. Match all applications, all devices
-     "path": [**],
-     "title: [**],
+     "path": ["**"],
+     "title: ["**"],
      "layer": ["**" : 0]
     }
   ]
