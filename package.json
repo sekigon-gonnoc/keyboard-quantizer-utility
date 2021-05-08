@@ -1,0 +1,36 @@
+{
+  "name": "keyboard-quantizer-utility",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "sekigon-gonnoc",
+  "license": "MIT",
+  "dependencies": {
+    "active-win": "^7.1.0",
+    "electron-store": "^8.0.0",
+    "micromatch": "^4.0.4",
+    "node-hid": "^2.1.1"
+  },
+  "devDependencies": {
+    "electron": "11.x",
+    "electron-builder": "^22.11.1",
+    "electron-rebuild": "^2.3.5",
+    "eslint": "^7.25.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.2.1"
+  },
+  "postinstall": "electron-builder install-app-deps",
+  "scripts": {
+    "start": "electron .",
+    "fmt": "prettier --write *.js *.json"
+  },
+  "build": {
+    "productName": "Keyboard Quantizer Utility",
+    "win": {
+      "target":"portable"
+    },
+    "directories": {
+      "output": "build"
+    }
+  }
+}
