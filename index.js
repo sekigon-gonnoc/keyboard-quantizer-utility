@@ -86,7 +86,9 @@ electron.app.on("ready", () => {
       {
         label: "Homepage",
         click: () => {
-          electron.shell.openExternal("https://github.com/sekigon-gonnoc");
+          electron.shell.openExternal(
+            "https://github.com/sekigon-gonnoc/keyboard-quantizer-utility"
+          );
         },
       },
       {
