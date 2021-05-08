@@ -7,6 +7,7 @@ const micromatch = require("micromatch");
 const store = new Store();
 let tray = null;
 let targetWindow = null;
+let disabled = false;
 
 store.set("AppName", "Keyboard Quantizer Utility");
 
@@ -40,6 +41,12 @@ electron.app.on("ready", () => {
         },
       },
       {
+        label: "Disable",
+        type: "checkbox",
+        checked: false,
+        click: (e) => { disabled = e.checked }
+      },
+      {
         label: "Homepage",
         click: () => {
           electron.shell.openExternal("https://github.com/sekigon-gonnoc");
@@ -53,6 +60,7 @@ electron.app.on("ready", () => {
   );
 
   setInterval(() => {
+    if (disabled) { return; }
     try {
       const win = activeWindow.sync();
 
@@ -85,10 +93,12 @@ electron.app.on("ready", () => {
           if (app) {
             kbds.forEach((kb) => {
               const qkb = new HID.HID(kb.path);
-              qkb.on('data', (data) => {
-                console.log(`receive:`, data);
-                if (data[0] == 0x02 && data[1] == 0x99) {
 
+              // read id command
+              qkb.write([0x00, 0x02, 0x99]);
+              try {
+                const data = qkb.readTimeout(100);
+                if (data[0] == 0x02 && data[1] == 0x99) {
                   const kbLabel = kb.label + `-${data[2]}`;
                   console.log(`Device  ${kbLabel}`);
 
@@ -101,23 +111,13 @@ electron.app.on("ready", () => {
 
                   // set default layer
                   qkb.write([0x00, 0x03, 0x99, app.layer[key]]);
+                  console.log(`Set default layer to ${app.layer[key]}`);
                 }
-                else if (data[0] == 0x03 && data[1] == 0x99) {
-                  console.log(`Set default layer ${data[2]}`);
-                  qkb.close();
-                  // console.log("device closed");
-                }
-                else if (data[0] == 0xff) {
-                  // unhandled
-                  qkb.close();
-                  // console.log("device closed");
-                }
-              });
-
-              qkb.on('error', (data)=>{console.log(`error ${data}`)});
-
-              // read id command
-              qkb.write([0x00, 0x02, 0x99]);
+              } catch (e) {
+                console.error(e);
+              } finally {
+                qkb.close();
+              }
 
             });
           }
