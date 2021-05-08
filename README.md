@@ -19,14 +19,22 @@ Electron based task tray app to change default layer of [Keyboard Quantizer](htt
     }
   ],
   "applications" [
-    "path": ["C:\\Windows\\System32\\cmd.exe"], // Application path
-    "title": [                                  // String in title bar
-      "**"                                      // Wild card is available
-    ],
-    "layer" : [
-      "kq-0": 0,                                // Default layer setting.
-      "kq-*": 0,                                // Key is a label defined in keyboards section followed by device id.
-    ]
+   {
+     "path": ["C:\\Windows\\System32\\cmd.exe"], // Application path
+     "title": [                                  // String in title bar
+       "**"                                      // Wild card is available
+     ],
+     "layer" : [
+       "kq-0": 0,                                // Default layer setting.
+       "kq-*": 0,                                // Key is a label defined in keyboards section followed by device id.
+     ]
+    },
+    {
+     // Default rule example. Match all applications, all devices
+     "path": [**],
+     "title: [**],
+     "layer": ["**" : 0]
+    }
   ]
 }
 ```
