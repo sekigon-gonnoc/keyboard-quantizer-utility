@@ -72,7 +72,7 @@ void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
 ```
 
 ## Pre-built binaries
-- Available at [Release](https://github.com/sekigon-gonnoc/keyboard-quantizer-utility/releases) page.
+- Pre-built app for win/linux and hex file for Keyboard Quantizer are available at [Release](https://github.com/sekigon-gonnoc/keyboard-quantizer-utility/releases) page.
 
 ## Build
 
