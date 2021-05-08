@@ -69,9 +69,7 @@ electron.app.on("ready", () => {
       {
         label: "Config",
         click: () => {
-          electron.shell.showItemInFolder(
-            `${electron.app.getPath("userData")}/config.json`
-          );
+          electron.shell.openPath(`${electron.app.getPath("userData")}`);
         },
       },
       {
