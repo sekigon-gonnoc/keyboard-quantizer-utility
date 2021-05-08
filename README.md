@@ -1,6 +1,8 @@
 # keyboard-quantizer-utility
 Electron based task tray app to change default layer of [Keyboard Quantizer](https://github.com/sekigon-gonnoc/keyboard-quantizer-doc) or ohter QMK enabled keyboards depending on active application.
 
+- **If you want to use VIA or Remap, disable this app while editing keymaps.**
+
 ## Requirement
 ### Linux
  - Install `xprops`, `xwininfo`
