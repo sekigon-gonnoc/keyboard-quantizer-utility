@@ -1,5 +1,5 @@
 # keyboard-quantizer-utility
-Electron based task tray app to change default layer of keyboard quantizer or QMK enabled keyboard depends on active application.
+Electron based task tray app to change default layer of [Keyboard Quantizer](https://github.com/sekigon-gonnoc/keyboard-quantizer-doc) or ohter QMK enabled keyboards depending on active application.
 
 ## Requirement
 ### Linux
