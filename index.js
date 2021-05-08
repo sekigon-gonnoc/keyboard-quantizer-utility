@@ -69,7 +69,7 @@ electron.app.on("ready", () => {
       {
         label: "Config",
         click: () => {
-          electron.shell.openExternal(
+          electron.shell.showItemInFolder(
             `${electron.app.getPath("userData")}/config.json`
           );
         },
@@ -138,7 +138,7 @@ electron.app.on("ready", () => {
 
               // read id command
               qkb.write([0x00, 0x02, 0x99]);
-              const data = qkb.readTimeout(100);
+              const data = qkb.readTimeout(1000);
               if (data[0] == 0x02 && data[1] == 0x99) {
                 const kbLabel = kb.label + `-${data[2]}`;
                 console.log(`Device  ${kbLabel}`);
