@@ -44,6 +44,10 @@ const trayIcon = `${__dirname}/trayIcon.${
   process.platform === "win32" ? "ico" : "png"
 }`;
 
+const trayIconDisabled = `${__dirname}/trayIconDisabled.${
+  process.platform === "win32" ? "ico" : "png"
+}`;
+
 const isQmkKeyboard = (k, d) => {
   return (
     d.vid ===
@@ -76,6 +80,7 @@ electron.app.on("ready", () => {
         checked: false,
         click: (e) => {
           disabled = e.checked;
+          tray.setImage(disabled ? trayIconDisabled : trayIcon);
         },
       },
       {
@@ -83,6 +88,9 @@ electron.app.on("ready", () => {
         click: () => {
           electron.shell.openExternal("https://github.com/sekigon-gonnoc");
         },
+      },
+      {
+        type: "separator",
       },
       {
         label: "Exit",
@@ -130,25 +138,20 @@ electron.app.on("ready", () => {
 
               // read id command
               qkb.write([0x00, 0x02, 0x99]);
-              try {
-                const data = qkb.readTimeout(100);
-                if (data[0] == 0x02 && data[1] == 0x99) {
-                  const kbLabel = kb.label + `-${data[2]}`;
-                  console.log(`Device  ${kbLabel}`);
+              const data = qkb.readTimeout(100);
+              if (data[0] == 0x02 && data[1] == 0x99) {
+                const kbLabel = kb.label + `-${data[2]}`;
+                console.log(`Device  ${kbLabel}`);
 
-                  const key = Object.keys(app.layer).find((k) =>
-                    micromatch.isMatch(kbLabel, k.toString())
-                  );
+                const key = Object.keys(app.layer).find((k) =>
+                  micromatch.isMatch(kbLabel, k.toString())
+                );
 
-                  // set default layer
-                  qkb.write([0x00, 0x03, 0x99, app.layer[key]]);
-                  console.log(`Set default layer to ${app.layer[key]}`);
-                }
-              } catch (e) {
-                console.error(e);
-              } finally {
-                qkb.close();
+                // set default layer
+                qkb.write([0x00, 0x03, 0x99, app.layer[key]]);
+                console.log(`Set default layer to ${app.layer[key]}`);
               }
+              qkb.close();
             });
           }
         }
