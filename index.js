@@ -125,7 +125,7 @@ electron.app.on("ready", () => {
         ) {
           targetWindow = win;
           console.log(
-            `Active window changed.\n\tpath:${win.owner.path}, title:${win.title}`
+            `Active window changed.\n\tpath:${win.owner.path}, \n\ttitle:${win.title}`
           );
           const app = store.get("applications")?.find((a) => {
             return (
