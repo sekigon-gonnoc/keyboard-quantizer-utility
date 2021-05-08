@@ -124,7 +124,9 @@ electron.app.on("ready", () => {
           targetWindow?.title != win.title
         ) {
           targetWindow = win;
-          console.log("Active window changed");
+          console.log(
+            `Active window changed.\n\tpath:${win.owner.path}, title:${win.title}`
+          );
           const app = store.get("applications")?.find((a) => {
             return (
               micromatch.isMatch(targetWindow.owner.path.toString(), a.path) &&
@@ -133,6 +135,8 @@ electron.app.on("ready", () => {
           });
 
           if (app) {
+            console.log(`Rule is found`);
+            console.log("\t", app);
             kbds.forEach((kb) => {
               const qkb = new HID.HID(kb.path);
 
