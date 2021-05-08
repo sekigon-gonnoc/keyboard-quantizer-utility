@@ -1,5 +1,10 @@
 # keyboard-quantizer-utility
-Change default layer of keyboard quantizer or QMK enabled keyboard depends on active application.
+Electron based task tray app to change default layer of keyboard quantizer or QMK enabled keyboard depends on active application.
+
+## Requirement
+### Linux
+ - Install `xprops`, `xwininfo`
+ - Set read/write permission to the keyboard by udev rules
 
 ## Configuration
 
@@ -54,6 +59,9 @@ void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
 #endif
 ```
 
+## Pre-built binaries
+- Available at [Release](https://github.com/sekigon-gonnoc/keyboard-quantizer-utility/releases) page.
+
 ## Build
 
 ```bash
@@ -65,3 +73,5 @@ void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
     # If you get errors, try electron- rebuild
     yarn run electron-rebuild
 ```
+
+- See also [active-win](https://github.com/sindresorhus/active-win) and [node-hid](https://github.com/node-hid/node-hid)
