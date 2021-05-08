@@ -8,6 +8,8 @@ Electron based task tray app to change default layer of [Keyboard Quantizer](htt
 
 ## Configuration
 
+- Right click tray icon and select `Config` and edit config.json
+
 ```
 {
   "keyboards": [
