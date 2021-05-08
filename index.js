@@ -9,7 +9,36 @@ let tray = null;
 let targetWindow = null;
 let disabled = false;
 
-store.set("AppName", "Keyboard Quantizer Utility");
+store.set("appName", "Keyboard Quantizer Utility");
+if (!store.get("keyboards")) {
+  store.set("keyboards", [
+    {
+      label: "kq",
+      productName: "keyboard_quantizer",
+      vid: "0xfeed",
+      pid: "0x9999",
+    },
+    {
+      label: "mq",
+      productName: "mouse_quantizer",
+      vid: "0xfeed",
+      pid: "0x3999",
+    },
+  ]);
+}
+
+if (!store.get("applications")) {
+  store.set("applications", [
+    {
+      path: "**",
+      title: "**",
+      layer: {
+        "kq-*": 0,
+        "mq-*": 0,
+      },
+    },
+  ]);
+}
 
 const trayIcon = `${__dirname}/trayIcon.${
   process.platform === "win32" ? "ico" : "png"
@@ -88,7 +117,7 @@ electron.app.on("ready", () => {
         ) {
           targetWindow = win;
           console.log("Active window changed");
-          const app = store.get("application")?.find((a) => {
+          const app = store.get("applications")?.find((a) => {
             return (
               micromatch.isMatch(targetWindow.owner.path.toString(), a.path) &&
               micromatch.isMatch(targetWindow.title.toString(), a.title)
