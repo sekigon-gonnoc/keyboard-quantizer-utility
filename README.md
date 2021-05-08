@@ -57,7 +57,7 @@ void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
 ## Build
 
 ```bash
-    yarn install -D
+    yarn install
     # Start app
     yarn start
     # Build App
