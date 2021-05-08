@@ -22,12 +22,14 @@
   "postinstall": "electron-builder install-app-deps",
   "scripts": {
     "start": "electron .",
+    "build": "electron-builder",
     "fmt": "prettier --write *.js *.json"
   },
   "build": {
     "productName": "Keyboard Quantizer Utility",
     "win": {
-      "target": "portable"
+      "target": "portable",
+      "icon": "icon.png"
     },
     "directories": {
       "output": "build"
