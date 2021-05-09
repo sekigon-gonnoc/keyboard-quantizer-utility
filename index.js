@@ -151,9 +151,11 @@ electron.app.on("ready", () => {
                   micromatch.isMatch(kbLabel, k.toString())
                 );
 
-                // set default layer
-                qkb.write([0x00, 0x03, 0x99, app.layer[key]]);
-                console.log(`Set default layer to ${app.layer[key]}`);
+                // Set layer command
+                if (key) {
+                  qkb.write([0x00, 0x03, 0x99, app.layer[key]]);
+                  console.log(`Set layer to ${app.layer[key]}`);
+                }
               }
               qkb.close();
             });
